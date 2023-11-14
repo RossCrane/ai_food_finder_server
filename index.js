@@ -10,7 +10,7 @@ const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-port = process.env.PORT || 80;
+const port = process.env.PORT || 80;
 
 const corsOptions = {
 	origin: 'https://ai-food-finder-client.vercel.app', // Replace with your frontend's actual origin
