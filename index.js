@@ -13,8 +13,9 @@ const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 80;
 
 const corsOptions = {
-	origin: '*',
-	//'https://ai-food-finder-client.vercel.app/', // Replace with your frontend's actual origin
+	origin: process.env.CLIENT_URL,
+	//'https://ai-food-finder-client.vercel.app',
+	// Replace with your frontend's actual origin
 	methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 	credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
