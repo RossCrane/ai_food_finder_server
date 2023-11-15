@@ -30,7 +30,7 @@ const getOptions = async (req, res) => {
 		res.send(data);
 	} catch (e) {
 		console.error(e);
-		res.status(500).send('error getting options');
+		res.status(500).send('error getting options in controller');
 	}
 };
 
@@ -53,8 +53,10 @@ const updateUserPreferences = async (req, res) => {
 		);
 
 		if (!updatedUser) {
-			console.log('User not found');
-			return res.status(404).json({ error: 'User not found' });
+			console.log('User not found in updateUserPreferences');
+			return res
+				.status(404)
+				.json({ error: 'User not found. Error in updateUserPrefs' });
 		}
 
 		// console.log('Updated User:', updatedUser);
@@ -62,7 +64,9 @@ const updateUserPreferences = async (req, res) => {
 		res.json(updatedUser);
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: 'Internal Server Error' });
+		res
+			.status(500)
+			.json({ error: 'Internal Server Error. Error in updateUserPrefs' });
 	}
 };
 
@@ -72,20 +76,26 @@ const getUserPreferences = async (req, res) => {
 		// console.log('Clerk User ID:', clerkUserId);
 
 		if (!clerkUserId) {
-			return res.status(400).json({ error: 'Clerk user ID is required' });
+			return res
+				.status(400)
+				.json({ error: 'Clerk user ID is required, Error in getUserPrefs' });
 		}
 
 		const user = await User.findOne({ clerkUserId: clerkUserId });
 
 		if (!user) {
-			return res.status(404).json({ error: 'User not found' });
+			return res
+				.status(404)
+				.json({ error: 'User not found, Error in getUserPrefs' });
 		}
 
 		// Send back the user's allergies and diets
 		res.json({ allergies: user.allergies, diets: user.diets });
 	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: 'Internal Server Error' });
+		res
+			.status(500)
+			.json({ error: 'Internal Server Error, Error in getUserPrefs' });
 	}
 };
 
